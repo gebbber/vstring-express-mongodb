@@ -2,12 +2,16 @@
   "name": "vstring-express-mongodb",
   "version": "0.0.1",
   "description": "MongoDb Verification String Store for vstring-express",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "docker-compose build && docker-compose up -d && node ./test/index.js && docker-compose down"
   },
   "author": "Gregory Everett Brandon",
   "license": "MIT",
+  "respository": {
+    "type": "git",
+    "url": "https://github.com/gebbber/vstring-express-mongodb.git"
+  },
   "dependencies": {
     "mongodb": "^4.3.0"
   },
