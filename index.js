@@ -7,32 +7,19 @@ module.exports = class VStringMongoStore {
 
     #collectionName;
     #uri;
-    #dbName;
-    #user;
-    #password;
 
-    constructor({ uri, db, collection, user, password }) {
-        this.#collectionName = collection || 'vstring Verification Strings';
+    constructor({ uri, collection }) {
+        this.#collectionName = collection || 'Verification Strings';
         this.#uri = uri;
-        this.#dbName = db;
-        this.#user = user;
-        this.#password = password;
     }
 
     onDisconnect(cb) {}
 
     async connect() {
         if (!this.#uri) throw new Error('Need connection URI');
-        if (!this.#uri.startsWith('mongodb://')) throw new Error('Needs to start with mongodb://');
-        if (!this.#dbName) throw new Error('Need target database name');
-
-        const credentials = this.#user && this.#password ? `${this.#user}:${this.#password}@` : '';
-        const uri = this.#uri.slice(10);
-        const connectString = `mongodb://${credentials}${uri}`;
-        this.mongoClient = new MongoClient(connectString);
+        this.mongoClient = new MongoClient(this.#uri);
         await this.mongoClient.connect();
-        this.db = this.mongoClient.db(this.#dbName);
-        this.collection = this.db.collection(this.#collectionName);
+        this.collection = mongoClient.db().collection(this.#collectionName);
         await this.flushExpired();
     }
 
