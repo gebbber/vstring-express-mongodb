@@ -11,8 +11,5 @@
     },
     "dependencies": {
         "mongodb": "^4.3.0"
-    },
-    "peerDependencies": {
-        "vstring-express": "^1.0.0"
     }
 }
