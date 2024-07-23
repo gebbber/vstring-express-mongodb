@@ -15,7 +15,7 @@ module.exports = class VStringMongoStore {
 
     onDisconnect(cb) {}
 
-    async connect() {
+    async init() {
         if (!this.#uri) throw new Error('Need connection URI');
         this.mongoClient = new MongoClient(this.#uri);
         await this.mongoClient.connect();
