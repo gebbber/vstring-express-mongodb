@@ -17,7 +17,7 @@ module.exports = class VStringMongoStore {
         if (!this.#uri) throw new Error('Need connection URI');
         this.mongoClient = new MongoClient(this.#uri);
         await this.mongoClient.connect();
-        this.collection = mongoClient.db().collection(this.#collectionName);
+        this.collection = this.mongoClient.db().collection(this.#collectionName);
         await this.flushExpired();
     }
 
